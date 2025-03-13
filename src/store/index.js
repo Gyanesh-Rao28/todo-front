@@ -99,6 +99,7 @@ export default createStore({
       try {
         const response = await axios.get("/todo/fetch", {
           withCredentials: true,
+          credentials: "include",
         });
         commit("setTodos", response.data.todos);
         return response;
