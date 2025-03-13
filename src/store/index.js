@@ -3,7 +3,7 @@ import { createStore } from "vuex";
 import axios from "axios";
 
 // Set base URL for axios
-axios.defaults.baseURL = "http://localhost:5000/api";
+axios.defaults.baseURL = "https://backend-todo-flax.vercel.app/api";
 
 // Add interceptor to include JWT cookie in requests
 axios.interceptors.request.use((config) => {

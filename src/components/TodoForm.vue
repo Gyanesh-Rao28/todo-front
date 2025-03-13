@@ -6,12 +6,18 @@
         <input 
           type="text" 
           v-model="text" 
-          placeholder="Add a new task..." 
+          placeholder="What needs to be done?" 
           class="form-control"
           required
         />
-        <button type="submit" class="btn btn-primary" :disabled="!text.trim()">
-          Add
+        <button 
+          type="submit" 
+          class="add-btn" 
+          :disabled="!text.trim()"
+          :class="{ 'disabled': !text.trim() }"
+        >
+          <span class="icon">add_task</span>
+          <span>Add Task</span>
         </button>
       </div>
     </form>
@@ -44,19 +50,56 @@ export default {
 
 <style scoped>
 .todo-form {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  width: 100%;
 }
 
 .input-group {
   display: flex;
+  width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-.input-group .form-control {
+.form-control {
   flex: 1;
-  border-radius: 4px 0 0 4px;
+  padding: 16px 20px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: #2d3748;
 }
 
-.input-group .btn {
-  border-radius: 0 4px 4px 0;
+.form-control::placeholder {
+  color: #a0aec0;
+}
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 20px;
+  background: linear-gradient(90deg, #3a86ff, #5e60ce);
+  color: white;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-btn:hover {
+  background: linear-gradient(90deg, #2a76ff, #4e50be);
+}
+
+.add-btn.disabled {
+  background: #cbd5e0;
+  cursor: not-allowed;
+}
+
+.icon {
+  font-family: 'Material Icons', sans-serif;
+  font-size: 20px;
 }
 </style>

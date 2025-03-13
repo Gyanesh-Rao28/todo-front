@@ -1,8 +1,12 @@
 // components/TodoList.vue
 <template>
   <div class="todo-list">
-    <h3 v-if="todos.length === 0">No tasks yet. Add your first todo!</h3>
-    <ul v-else>
+    <div v-if="todos.length === 0" class="empty-state">
+      <div class="empty-icon">assignment</div>
+      <h3>No tasks yet</h3>
+      <p>Add your first task to get started!</p>
+    </div>
+    <transition-group name="list" tag="ul" v-else>
       <TodoItem 
         v-for="todo in todos" 
         :key="todo._id" 
@@ -10,7 +14,7 @@
         @update-todo="updateTodo"
         @delete-todo="deleteTodo"
       />
-    </ul>
+    </transition-group>
   </div>
 </template>
 
@@ -48,17 +52,54 @@ export default {
 
 <style scoped>
 .todo-list {
-  margin-top: 20px;
+  margin-top: 24px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+  background-color: #f7fafc;
+  border-radius: 12px;
+}
+
+.empty-icon {
+  font-family: 'Material Icons', sans-serif;
+  font-size: 48px;
+  color: #a0aec0;
+  margin-bottom: 16px;
 }
 
 h3 {
-  color: #777;
-  text-align: center;
-  margin: 30px 0;
+  color: #4a5568;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+p {
+  color: #a0aec0;
 }
 
 ul {
   list-style-type: none;
   padding: 0;
+}
+
+/* List animations */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(-30px);
 }
 </style>
